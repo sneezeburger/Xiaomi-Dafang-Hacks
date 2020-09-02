@@ -136,9 +136,9 @@ if [ -n "$F_action" ]; then
       }
     },
     \"disk_space\": {
-      \"total\": $(df | tr -s ' ' $'\t' | grep /dev/mmcblk0p1 | cut -f2),
-      \"used\": $(df | tr -s ' ' $'\t' | grep /dev/mmcblk0p1 | cut -f3),
-      \"free\": $(df | tr -s ' ' $'\t' | grep /dev/mmcblk0p1 | cut -f4)
+      \"total\": $(df | tr -s ' ' $'\t' | grep /dev/mmcblk0p1 | grep /system/sdcard | cut -f2),
+      \"used\": $(df | tr -s ' ' $'\t' | grep /dev/mmcblk0p1 | grep /system/sdcard | cut -f3),
+      \"free\": $(df | tr -s ' ' $'\t' | grep /dev/mmcblk0p1 | grep /system/sdcard | cut -f4)
     },
     \"memory\": {
       \"total\": $(cat /proc/meminfo  | tr -s ' ' $'\t' | grep MemTotal: | cut -f2),
@@ -183,12 +183,12 @@ if [ -n "$F_action" ]; then
   ir_cut_on)
     setGpio 25 1
     setGpio 26 0
-    getReturn 1234 "success" "IR cut is On."
+    getReturn 1234 "success" "IR Filter is On."
     ;;
   ir_cut_off)
     setGpio 25 0
     setGpio 26 1
-    getReturn 1234 "success" "IR cut is Off."
+    getReturn 1234 "success" "IR Filter is Off."
     ;;
 # Control Motor PTZ
   motor_stop)
